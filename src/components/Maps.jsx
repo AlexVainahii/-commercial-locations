@@ -13,9 +13,10 @@ import { getDistance } from 'fakeApi';
 import { fetchCommerce } from 'redux/Comercial/operationsCommercial';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCommerces } from 'redux/selectors';
-
+import axios from 'axios';
 import { FaWindowClose, FaStore, FaCrosshairs, FaMap } from 'react-icons/fa';
 import { changeMapType } from 'redux/MapType/mapSlice';
+const apiUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 
 const Maps = () => {
   const dispatch = useDispatch();
@@ -85,9 +86,17 @@ const Maps = () => {
     return { top, left };
   };
 
-  const handleMapClick = event => {
+  const handleMapClick = async event => {
     const clickedCoordinates = event.latlng;
-
+    const response = await axios.get(`{apiUrl}`, {
+      params: {
+        location: `${clickedCoordinates.lat},${clickedCoordinates.lng}`,
+        radius: 50000,
+        keyword: 'business', // Змініть ключове слово на те, що підходить для вашого пошуку
+        key: process.env.REACT_APP_API_KEY,
+      },
+    });
+    console.log('response :>> ', response);
     setUserLocation({
       lat: clickedCoordinates.lat,
       lng: clickedCoordinates.lng,
@@ -166,7 +175,16 @@ const Maps = () => {
   const handleUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        position => {
+        async position => {
+          const response = await axios.get(`${apiUrl}`, {
+            params: {
+              location: `${position.coords.latitude},${position.coords.longitude}`,
+              radius: 50000,
+              keyword: 'business', // Змініть ключове слово на те, що підходить для вашого пошуку
+              key: process.env.REACT_APP_API_KEY,
+            },
+          });
+          console.log('response :>> ', response);
           setUserLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,

@@ -135,6 +135,29 @@ const AddForm = () => {
       lat: clickedCoordinates.lat,
       lng: clickedCoordinates.lng,
     });
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const latitude = clickedCoordinates.lat; // Широта
+    const longitude = clickedCoordinates.lng; // Довгота
+    console.log('object :>> ', apiKey);
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const address = data.results[0].formatted_address;
+          setNewCommerce(prevCommerce => ({
+            ...prevCommerce,
+            address: address,
+          }));
+          console.log('Адреса:', address);
+        } else {
+          console.log('Не вдалося знайти адресу за вказаними координатами.');
+        }
+      })
+      .catch(error => {
+        console.error('Помилка запиту до Google Maps Geocoding API:', error);
+      });
     setNewCommerce(prevCommerce => ({
       ...prevCommerce,
       location: {
