@@ -3,10 +3,9 @@ import L from 'leaflet';
 import 'leaflet-arrowheads';
 import 'leaflet-osm';
 import 'leaflet/dist/leaflet.css';
-import markerIcon from '../images/marker-icon.png';
+
 import myLocationIcon from '../images/myLocation.png';
-import pinMarkerIcon from '../images/pinMarker.png';
-import { FaWindowClose, FaStore, FaCrosshairs, FaMap } from 'react-icons/fa';
+import { FaCrosshairs, FaMap } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeMapType } from 'redux/MapType/mapSlice';
 import { addCommerce } from 'redux/Comercial/operationsCommercial';
@@ -144,26 +143,6 @@ const AddForm = () => {
     }));
   };
 
-  const MyLocationIcon = L.icon({
-    iconUrl: myLocationIcon,
-    iconSize: [80, 91],
-    iconAnchor: [35, 74],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-    title: 'Маркер',
-    alt: 'Маркер',
-  });
-
-  const PinMarkerIcon = L.icon({
-    iconUrl: pinMarkerIcon,
-    iconSize: [30, 40],
-    iconAnchor: [18, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-    title: 'Маркер',
-    alt: 'Маркер',
-  });
-
   const toggleMapType = () => {
     const newMapType = mapType === 'standard' ? 'hybrid' : 'standard';
     dispatch(changeMapType(newMapType));
@@ -182,7 +161,15 @@ const AddForm = () => {
       const mapCenter = userLocation;
       const zoom = 11;
       mapRef.current = L.map(mapContainerRef.current).setView(mapCenter, zoom);
-
+      const MyLocationIcon = L.icon({
+        iconUrl: myLocationIcon,
+        iconSize: [80, 91],
+        iconAnchor: [35, 74],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+        title: 'Маркер',
+        alt: 'Маркер',
+      });
       const initialMapType = mapType === 'standard' ? 'm' : 'y';
       L.tileLayer(
         `https://{s}.google.com/vt/lyrs=${initialMapType}&x={x}&y={y}&z={z}`,
