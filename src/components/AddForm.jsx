@@ -75,9 +75,10 @@ const ControlButtons = styled.div`
 `;
 
 const ControlButton = styled.button`
-  background: ${({ active }) => (active ? 'none' : '#2e3a59')};
+  background: ${({ active }) => (active === 'true' ? 'none' : '#2e3a59')};
   padding: 5px;
-  box-shadow: ${({ active }) => (active ? 'none' : '0px 0px 10px 0px #fff')};
+  box-shadow: ${({ active }) =>
+    active === 'true' ? 'none' : '0px 0px 10px 0px #fff'};
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -291,7 +292,7 @@ const AddForm = () => {
 
       <ControlButtons>
         <ControlButton
-          active={mapType === 'standard'}
+          active={(mapType === 'standard').toString()}
           onClick={() => handleUserLocation()}
         >
           <FaCrosshairs
@@ -299,7 +300,10 @@ const AddForm = () => {
             color={mapType === 'standard' ? '#2e3a59' : '#fff'}
           />
         </ControlButton>
-        <ControlButton active={mapType === 'standard'} onClick={toggleMapType}>
+        <ControlButton
+          active={(mapType === 'standard').toString()}
+          onClick={toggleMapType}
+        >
           <FaMap
             size={40}
             color={mapType === 'standard' ? '#2e3a59' : '#fff'}

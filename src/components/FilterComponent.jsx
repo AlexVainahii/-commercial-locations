@@ -26,6 +26,9 @@ const slideOut = keyframes`
 `;
 
 const FilterContainer = styled.div`
+  // Змінено максимальну ширину для респонсивності
+  max-width: 100%;
+  margin: 0 auto;
   position: absolute;
   top: ${({ isvisible, active }) =>
     isvisible === 'true'
@@ -38,8 +41,7 @@ const FilterContainer = styled.div`
   box-sizing: border-box;
   z-index: 5000;
   display: flex;
-  flex-wrap: nowrap; /* Забороняє перенесення на новий рядок */
-  overflow-x: auto; /* Дозволяє прокручувати горизонтально, якщо елементи не вміщуються */
+  flex-wrap: wrap; /* Змінено для респонсивності */
   gap: 10px;
   animation: ${({ isvisible }) => (isvisible === 'true' ? slideIn : slideOut)}
     0.5s ease;
@@ -50,8 +52,9 @@ const FilterItem = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  margin-bottom: 10px; /* Збільшено відступ для респонсивності */
   justify-content: flex-end;
+  width: 100%; /* Змінено ширину для респонсивності */
 `;
 
 const FilterLabel = styled.label`

@@ -6,6 +6,7 @@ export const Cont = styled.div`
   position: absolute;
   top: 0;
 `;
+
 export const Title = styled.h1`
   font-size: 2.5em;
   margin-top: 150px;
@@ -16,6 +17,12 @@ export const Title = styled.h1`
     0px 2px 2px rgba(0, 0, 0, 0.3), -1px 3px 3px rgba(0, 0, 0, 0.2),
     -1px 5px 5px rgba(0, 0, 0, 0.1), -2px 8px 8px rgba(0, 0, 0, 0.1),
     -2px 13px 13px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1000px) {
+    margin-left: 20px;
+    margin-top: 50px;
+    font-size: 2em;
+  }
 `;
 
 export const Subtitle = styled.p`
@@ -27,7 +34,13 @@ export const Subtitle = styled.p`
     -1px 5px 5px rgba(0, 0, 0, 0.1), -2px 8px 8px rgba(0, 0, 0, 0.1),
     -2px 13px 13px rgba(0, 0, 0, 0.1);
   margin-bottom: 120px;
+
+  @media (max-width: 1000px) {
+    margin-left: 20px;
+    font-size: 1.5em;
+  }
 `;
+
 export const Subtit = styled.p`
   margin-left: 150px;
   font-size: 1.8em;
@@ -37,6 +50,11 @@ export const Subtit = styled.p`
     0px 2px 2px rgba(0, 0, 0, 0.3), -1px 3px 3px rgba(0, 0, 0, 0.2),
     -1px 5px 5px rgba(0, 0, 0, 0.1), -2px 8px 8px rgba(0, 0, 0, 0.1),
     -2px 13px 13px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1000px) {
+    margin-left: 20px;
+    font-size: 1.5em;
+  }
 `;
 
 export const Button = styled(Link)`
@@ -57,7 +75,12 @@ export const Button = styled(Link)`
   &:hover {
     background-color: #217dbb;
   }
+
+  @media (max-width: 1000px) {
+    margin-left: 20px;
+  }
 `;
+
 const Home = () => {
   return (
     <div>
@@ -72,4 +95,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;

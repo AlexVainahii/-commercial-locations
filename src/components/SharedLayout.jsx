@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import React from 'react';
 import {
@@ -11,28 +11,59 @@ import {
   Content,
   NavItem,
   Contain,
+  MenuButton,
+  Img,
+  MenuCloseButton,
 } from './SharedLayout.styled';
+import { HiMenu, HiX } from 'react-icons/hi';
 
 import images from '../images/logo3.png';
 import { ToastContainer } from 'react-toastify';
 import { Loader } from './Loader';
+import { useSelector } from 'react-redux';
+import { selectMapType } from 'redux/selectors';
 
 export const SharedLayout = () => {
+  const [isHeaderVisible, setHeaderVisibility] = useState(false);
+  const mapType = useSelector(selectMapType);
+
+  const toggleMenu = () => {
+    setHeaderVisibility(!isHeaderVisible);
+  };
+
   return (
     <Content>
-      <Header>
+      <MenuButton onClick={toggleMenu} maptype={mapType}>
+        <HiMenu size={mapType === 'standard' ? 40 : 30} />
+      </MenuButton>
+      <Header isheadervisible={isHeaderVisible.toString()}>
         <Container>
           <Logo to="/">
-            <img src={images} alt="logo" width={500} />
+            <Img
+              src={images}
+              alt="logo"
+              isheadervisible={isHeaderVisible.toString()}
+            />
           </Logo>
           <Nav>
-            <NavItem to="/dashboard/">Мапа локацій</NavItem>
-            <NavItem to="/dashboard/add">Додати локацію</NavItem>
-            <NavItem to="/dashboard/about">Про нас</NavItem>
+            <NavItem onClick={toggleMenu} to="/dashboard/">
+              Мапа локацій
+            </NavItem>
+            <NavItem onClick={toggleMenu} to="/dashboard/add">
+              Додати локацію
+            </NavItem>
+            <NavItem onClick={toggleMenu} to="/dashboard/about">
+              Про нас
+            </NavItem>
           </Nav>
+          <MenuCloseButton onClick={toggleMenu} maptype={mapType}>
+            <HiX size={30} />
+          </MenuCloseButton>
         </Container>
+
         <ToastContainer />
       </Header>
+
       <Contain>
         <Main>
           <Container>

@@ -201,7 +201,13 @@ const Maps = () => {
           ];
 
       const zoom = 11;
-      mapRef.current = L.map(mapContainerRef.current).setView(centrMap, zoom);
+      const mapOptions = {
+        zoomControl: false, // Вимкнути стандартні кнопки зуму
+      };
+      mapRef.current = L.map(mapContainerRef.current, mapOptions).setView(
+        centrMap,
+        zoom
+      );
 
       const initialMapType = mapType === 'standard' ? 'm' : 'y';
       L.tileLayer(
@@ -213,7 +219,7 @@ const Maps = () => {
           maxZoom: 20,
         }
       ).addTo(mapRef.current);
-
+      L.control.zoom({ position: 'bottomleft' }).addTo(mapRef.current);
       mapRef.current.on('click', handleMapClick);
       let line;
       if (userLocation) {
@@ -241,9 +247,8 @@ const Maps = () => {
           userMarker.setIcon(MyLocationIcon);
           userMarker.closePopup();
         });
-        console.log(' :>> ', coordinates);
+
         coordinates.forEach(coordinate => {
-          console.log('object :>> ', userLocation, coordinate?.location);
           const dist = getDistance(userLocation, coordinate?.location);
 
           const marker = L.marker(coordinate?.location, {
