@@ -1,10 +1,10 @@
 {
   "files": {
     "main.css": "/commercial-locations/static/css/main.48c80563.css",
-    "main.js": "/commercial-locations/static/js/main.d4934214.js",
+    "main.js": "/commercial-locations/static/js/main.b1219d42.js",
     "static/js/140.79866b19.chunk.js": "/commercial-locations/static/js/140.79866b19.chunk.js",
     "static/js/175.54beb309.chunk.js": "/commercial-locations/static/js/175.54beb309.chunk.js",
-    "static/js/293.12f88cb1.chunk.js": "/commercial-locations/static/js/293.12f88cb1.chunk.js",
+    "static/js/293.6905047e.chunk.js": "/commercial-locations/static/js/293.6905047e.chunk.js",
     "static/media/about.png": "/commercial-locations/static/media/about.943041e8bc39994d3eb9.png",
     "static/media/pinMarker.png": "/commercial-locations/static/media/pinMarker.69f3e6cdf3130b51865c.png",
     "static/media/marker-icon.png": "/commercial-locations/static/media/marker-icon.1d70acf74c8d6ccb987a.png",
@@ -13,13 +13,13 @@
     "static/media/myLocation.png": "/commercial-locations/static/media/myLocation.95a31ea43486fe9c0471.png",
     "index.html": "/commercial-locations/index.html",
     "main.48c80563.css.map": "/commercial-locations/static/css/main.48c80563.css.map",
-    "main.d4934214.js.map": "/commercial-locations/static/js/main.d4934214.js.map",
+    "main.b1219d42.js.map": "/commercial-locations/static/js/main.b1219d42.js.map",
     "140.79866b19.chunk.js.map": "/commercial-locations/static/js/140.79866b19.chunk.js.map",
     "175.54beb309.chunk.js.map": "/commercial-locations/static/js/175.54beb309.chunk.js.map",
-    "293.12f88cb1.chunk.js.map": "/commercial-locations/static/js/293.12f88cb1.chunk.js.map"
+    "293.6905047e.chunk.js.map": "/commercial-locations/static/js/293.6905047e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.48c80563.css",
-    "static/js/main.d4934214.js"
+    "static/js/main.b1219d42.js"
   ]
 }
