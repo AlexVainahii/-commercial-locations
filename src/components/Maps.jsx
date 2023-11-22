@@ -86,17 +86,9 @@ const Maps = () => {
     return { top, left };
   };
 
-  const handleMapClick = async event => {
+  const handleMapClick = event => {
     const clickedCoordinates = event.latlng;
-    const response = await axios.get(`{apiUrl}`, {
-      params: {
-        location: `${clickedCoordinates.lat},${clickedCoordinates.lng}`,
-        radius: 50000,
-        keyword: 'business', // Змініть ключове слово на те, що підходить для вашого пошуку
-        key: process.env.REACT_APP_API_KEY,
-      },
-    });
-    console.log('response :>> ', response);
+
     setUserLocation({
       lat: clickedCoordinates.lat,
       lng: clickedCoordinates.lng,
@@ -175,16 +167,7 @@ const Maps = () => {
   const handleUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        async position => {
-          const response = await axios.get(`${apiUrl}`, {
-            params: {
-              location: `${position.coords.latitude},${position.coords.longitude}`,
-              radius: 50000,
-              keyword: 'business', // Змініть ключове слово на те, що підходить для вашого пошуку
-              key: process.env.REACT_APP_API_KEY,
-            },
-          });
-          console.log('response :>> ', response);
+        position => {
           setUserLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,

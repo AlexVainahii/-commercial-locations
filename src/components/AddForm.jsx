@@ -135,10 +135,9 @@ const AddForm = () => {
       lat: clickedCoordinates.lat,
       lng: clickedCoordinates.lng,
     });
-    const apiKey = process.env.REACT_APP_API_KEY;
+    const apiKey = 'AIzaSyCXj6myUOGLNmVBVk0FVDL4vLEtrx37yAU';
     const latitude = clickedCoordinates.lat; // Широта
     const longitude = clickedCoordinates.lng; // Довгота
-    console.log('object :>> ', apiKey);
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`
     )
