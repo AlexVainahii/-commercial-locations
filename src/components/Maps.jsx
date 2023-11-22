@@ -13,10 +13,8 @@ import { getDistance } from 'fakeApi';
 import { fetchCommerce } from 'redux/Comercial/operationsCommercial';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCommerces } from 'redux/selectors';
-import axios from 'axios';
 import { FaWindowClose, FaStore, FaCrosshairs, FaMap } from 'react-icons/fa';
 import { changeMapType } from 'redux/MapType/mapSlice';
-const apiUrl = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
 
 const Maps = () => {
   const dispatch = useDispatch();
@@ -39,7 +37,9 @@ const Maps = () => {
   const [selectedCommerce, setSelectedCommerce] = useState(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [distance, setDistance] = useState(0);
-
+  const [generatedText, setGeneratedText] = useState(
+    'Дана локація ідеально підходить для бізнесу'
+  );
   const mapType = useSelector(selectMapType);
 
   const setPziLocation = () => {
@@ -48,9 +48,7 @@ const Maps = () => {
   const toggleMapType = () => {
     const newMapType = mapType === 'standard' ? 'hybrid' : 'standard';
     dispatch(changeMapType(newMapType));
-    // Встановлюємо статус у true, коли тип карти оновлено
 
-    // Оновлюємо шари карти
     mapRef.current.eachLayer(layer => {
       if (layer instanceof L.TileLayer) {
         layer.setUrl(
@@ -122,6 +120,31 @@ const Maps = () => {
     title: 'Маркер',
     alt: 'Маркер',
   });
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        'https://api.openai.com/v1/engines/davinci/completions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization:
+              'Bearer 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',
+          },
+          body: JSON.stringify({
+            prompt: 'привіт',
+            max_tokens: 150,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      setGeneratedText(data.choices[0]?.text);
+    } catch (error) {
+      console.error('Error fetching data from OpenAI API:', error);
+    }
+  };
 
   useEffect(() => {
     if (active) {
@@ -417,6 +440,7 @@ const Maps = () => {
             <p>Широта: {selectedCommerce.location.lat}</p>
             <p>Довгота: {selectedCommerce.location.lng}</p>
             <p>Відстань до об'єкта: {distance} км</p>
+            <p> {generatedText} </p>
             <div style={{ marginTop: '20px' }}>
               <FaStore size={50} color="#2E3A59" />
             </div>
