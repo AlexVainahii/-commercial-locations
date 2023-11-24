@@ -9,7 +9,7 @@ import pinMarkerIcon from '../images/pinMarker.png';
 import FilterComponent from './FilterComponent';
 import { selectFilter, selectMapType } from 'redux/selectors';
 import Modal from 'react-modal';
-import { getDistance } from 'fakeApi';
+import { genText, getDistance } from 'Api';
 import { fetchCommerce } from 'redux/Comercial/operationsCommercial';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCommerces } from 'redux/selectors';
@@ -37,9 +37,7 @@ const Maps = () => {
   const [selectedCommerce, setSelectedCommerce] = useState(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [distance, setDistance] = useState(0);
-  const [generatedText, setGeneratedText] = useState(
-    'Дана локація ідеально підходить для бізнесу'
-  );
+  const [generatedText, setGeneratedText] = useState('');
   const mapType = useSelector(selectMapType);
 
   const setPziLocation = () => {
@@ -121,7 +119,7 @@ const Maps = () => {
     alt: 'Маркер',
   });
 
-  const fetchData = async () => {
+  const fetchData = async name => {
     try {
       const response = await fetch(
         'https://api.openai.com/v1/engines/davinci/completions',
@@ -133,8 +131,8 @@ const Maps = () => {
               'Bearer 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',
           },
           body: JSON.stringify({
-            prompt: 'привіт',
-            max_tokens: 150,
+            prompt: `опиши рентабельність ${name}`,
+            max_tokens: 10,
           }),
         }
       );
@@ -142,6 +140,7 @@ const Maps = () => {
       const data = await response.json();
       setGeneratedText(data.choices[0]?.text);
     } catch (error) {
+      setGeneratedText(name + genText);
       console.error('Error fetching data from OpenAI API:', error);
     }
   };
@@ -282,7 +281,7 @@ const Maps = () => {
           marker.addTo(mapRef.current);
           marker.on('click', () => {
             setDistance(dist);
-
+            fetchData(coordinate.name);
             setSelectedCommerce(coordinate);
             const pixelCoordinates = mapRef.current.latLngToContainerPoint(
               coordinate.location
@@ -406,7 +405,7 @@ const Maps = () => {
           },
           content: {
             width: '300px',
-            height: '400px',
+            height: '450px',
             position: 'absolute',
             top: modalPosition.top,
             left: modalPosition.left,

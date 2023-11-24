@@ -310,7 +310,7 @@ const AddForm = () => {
         <SubmitButton type="submit">Додати комерційний об'єкт</SubmitButton>
       </Form>
 
-      <MapContainer style={{ height: '490px' }} ref={mapContainerRef} />
+      <MapContainer style={{ height: '390px' }} ref={mapContainerRef} />
 
       <ControlButtons>
         <ControlButton

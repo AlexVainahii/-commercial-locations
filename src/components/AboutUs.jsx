@@ -14,12 +14,12 @@ const Title = styled.h1`
 `;
 
 const Paragraph = styled.p`
-  font-size: 16px;
+  font-size: 13px;
   color: #333;
-  line-height: 1.6;
+  line-height: 1.4;
 `;
 const Image = styled.img`
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
   margin-top: 20px;
 `;

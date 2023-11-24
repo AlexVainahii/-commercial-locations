@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  height: 100vh;
 `;
 
 export const Container = styled.div`

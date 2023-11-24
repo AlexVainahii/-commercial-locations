@@ -36,3 +36,5 @@ export function getZoom(distance) {
   }
   return 12;
 }
+export const genText =
+  ' - локація дуже рентабельна завдяки вдалому поєднанню вищого рівня обслуговування та унікального  досвіду.';

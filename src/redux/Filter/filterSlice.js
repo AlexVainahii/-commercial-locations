@@ -10,7 +10,7 @@ export const filterSlice = createSlice({
     maxArea: 0,
     radius: 0,
     address: '',
-    name: '', // Додайте поле для фільтрації за назвою
+    name: '',
   },
   reducers: {
     changeFilter: (state, { payload }) => {
